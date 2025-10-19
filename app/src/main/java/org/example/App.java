@@ -3,26 +3,39 @@
  */
 package org.example;
 
+import java.io.*;
 import java.util.*;
 
 public class App {
     public static void main(String[] args) {
-        // Full path to your CSV file
+        // CSV file path
         String fileName = "cheese_data.csv";
 
         List<Cheese> cheeseList = CheeseCSVReader.readCheeseData(fileName);
         CheeseCollection collection = new CheeseCollection(cheeseList);
 
-         // Prints all loaded cheeses for checking data if needed
-         // collection.printAllCheeses();
+        String outputFile = "output.txt";
 
-         // Run statistics
-        System.out.println("\n=== Cheese Statistics ===");
-        CheeseStatistics stats = new CheeseStatistics(collection);
-        stats.countByMilkTreatment();
-        stats.countOrganicHighMoisture();
-        stats.mostCommonMilkType();
+        try (PrintWriter writer = new PrintWriter(new FileWriter(outputFile))) {
+            // Run statistics and output to both console and file
+            CheeseStatistics stats = new CheeseStatistics(collection);
 
+            System.out.println("\n=== Cheese Statistics ===");
+            writer.println("\n=== Cheese Statistics ===");
 
+            // Count by milk treatment
+            stats.countByMilkTreatment(System.out, writer);
+
+            // Count organic high moisture
+            stats.countOrganicHighMoisture(System.out, writer);
+
+            // Most common milk type
+            stats.mostCommonMilkType(System.out, writer);
+
+            System.out.println("\nStatistics also written to " + outputFile);
+
+        } catch (IOException e) {
+            System.err.println("Error writing to file: " + e.getMessage());
+        }
     }
 }

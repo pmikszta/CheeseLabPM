@@ -1,7 +1,8 @@
 package org.example;
 
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.util.*;
-
 
 public class CheeseStatistics {
     private CheeseCollection collection;
@@ -10,8 +11,8 @@ public class CheeseStatistics {
         this.collection = collection;
     }
 
-    //  Count cheeses by milk treatment type (Pasteurized vs Raw)
-    public void countByMilkTreatment() {
+    // 1️⃣ Count cheeses by milk treatment type (Pasteurized vs Raw)
+    public void countByMilkTreatment(PrintStream console, PrintWriter file) {
         int pasteurizedCount = 0;
         int rawCount = 0;
 
@@ -24,13 +25,21 @@ public class CheeseStatistics {
             }
         }
 
-        System.out.println("Milk Treatment Summary:");
-        System.out.println(" - Pasteurized milk cheeses: " + pasteurizedCount);
-        System.out.println(" - Raw milk cheeses: " + rawCount);
+        String output1 = "Milk Treatment Summary:";
+        String output2 = " - Pasteurized milk cheeses: " + pasteurizedCount;
+        String output3 = " - Raw milk cheeses: " + rawCount;
+
+        console.println(output1);
+        console.println(output2);
+        console.println(output3);
+
+        file.println(output1);
+        file.println(output2);
+        file.println(output3);
     }
 
-    //  Count organic cheeses with moisture > 41.0%
-    public void countOrganicHighMoisture() {
+    // 2️⃣ Count organic cheeses with moisture > 41.0%
+    public void countOrganicHighMoisture(PrintStream console, PrintWriter file) {
         int count = 0;
         for (Cheese c : collection.getAllCheeses()) {
             if (c.isOrganic() && c.getMoisturePercent() > 41.0) {
@@ -38,11 +47,14 @@ public class CheeseStatistics {
             }
         }
 
-        System.out.println("Organic cheeses with >41.0% moisture: " + count);
+        String output = "Organic cheeses with >41.0% moisture: " + count;
+
+        console.println(output);
+        file.println(output);
     }
 
-    //  Find the most common milk type
-    public void mostCommonMilkType() {
+    // 3️⃣ Find the most common milk type
+    public void mostCommonMilkType(PrintStream console, PrintWriter file) {
         Map<String, Integer> milkTypeCounts = new HashMap<>();
 
         for (Cheese c : collection.getAllCheeses()) {
@@ -60,7 +72,10 @@ public class CheeseStatistics {
             }
         }
 
-        System.out.println("Most common milk type in Canada: " +
-                (mostCommon != null ? mostCommon + " (" + maxCount + " cheeses)" : "No data"));
+        String output = "Most common milk type in Canada: " +
+                (mostCommon != null ? mostCommon + " (" + maxCount + " cheeses)" : "No data");
+
+        console.println(output);
+        file.println(output);
     }
 }
