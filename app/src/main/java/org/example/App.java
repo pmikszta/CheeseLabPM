@@ -3,12 +3,26 @@
  */
 package org.example;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import java.util.*;
 
+public class App {
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        // Full path to your CSV file
+        String fileName = "cheese_data.csv";
+
+        List<Cheese> cheeseList = CheeseCSVReader.readCheeseData(fileName);
+        CheeseCollection collection = new CheeseCollection(cheeseList);
+
+         // Prints all loaded cheeses for checking data if needed
+         // collection.printAllCheeses();
+
+         // Run statistics
+        System.out.println("\n=== Cheese Statistics ===");
+        CheeseStatistics stats = new CheeseStatistics(collection);
+        stats.countByMilkTreatment();
+        stats.countOrganicHighMoisture();
+        stats.mostCommonMilkType();
+
+
     }
 }
