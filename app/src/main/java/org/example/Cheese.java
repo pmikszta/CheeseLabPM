@@ -1,5 +1,6 @@
 package org.example;
 
+// fields for every column
 public class Cheese {
     private int cheeseId;
     private String manufacturerProvCode;

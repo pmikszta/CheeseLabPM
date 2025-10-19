@@ -11,7 +11,7 @@ public class CheeseStatistics {
         this.collection = collection;
     }
 
-    // 1️⃣ Count cheeses by milk treatment type (Pasteurized vs Raw)
+     // Count cheeses by milk treatment type (Pasteurized vs Raw)
     public void countByMilkTreatment(PrintStream console, PrintWriter file) {
         int pasteurizedCount = 0;
         int rawCount = 0;
@@ -38,7 +38,7 @@ public class CheeseStatistics {
         file.println(output3);
     }
 
-    // 2️⃣ Count organic cheeses with moisture > 41.0%
+    // Count organic cheeses with moisture > 41.0%
     public void countOrganicHighMoisture(PrintStream console, PrintWriter file) {
         int count = 0;
         for (Cheese c : collection.getAllCheeses()) {
@@ -53,19 +53,19 @@ public class CheeseStatistics {
         file.println(output);
     }
 
-    // 3️⃣ Find the most common milk type
+    // Find the most common milk type
     public void mostCommonMilkType(PrintStream console, PrintWriter file) {
         Map<String, Integer> milkTypeCounts = new HashMap<>();
 
         for (Cheese c : collection.getAllCheeses()) {
-            String milkType = c.getMilkTypeEn().trim().toLowerCase();
+             String milkType = c.getMilkTypeEn().trim().toLowerCase();
             milkTypeCounts.put(milkType, milkTypeCounts.getOrDefault(milkType, 0) + 1);
         }
 
         String mostCommon = null;
         int maxCount = 0;
 
-        for (Map.Entry<String, Integer> entry : milkTypeCounts.entrySet()) {
+         for (Map.Entry<String, Integer> entry : milkTypeCounts.entrySet()) {
             if (entry.getValue() > maxCount) {
                 mostCommon = entry.getKey();
                 maxCount = entry.getValue();
